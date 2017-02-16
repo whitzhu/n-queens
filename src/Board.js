@@ -140,18 +140,13 @@
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       var diag = [];
       var sum = [];
-      // for (var i = majorDiagonalColumnIndexAtFirstRow + 1; i < this._currentAttributes.n; i++) {
-      //   diag.push(this._currentAttributes[i][i-1]);
-      // }
-      // return diag;
       var j = 0;
       for ( var i = majorDiagonalColumnIndexAtFirstRow; i < this._currentAttributes.n; i++) {
-        diag.push(this._currentAttributes[j][i]);
-        j++;     
+        if (j < this._currentAttributes.n) {
+          diag.push(this._currentAttributes[j][i]);
+          j++;     
+        }   
       }
-
-      // return diag;
-
       sum = diag.reduce(function(acc, val) {
         return acc + val;
       });
@@ -173,10 +168,7 @@
       return sum > 1;
     },
 
-    // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      // var j = this._currentAttributes.n;
-      // for(var i = 0; i<this._currentAttributes.n; )
       for (var i = 0; i < this._currentAttributes.n; i++) {
         if (this.hasMajorDiagonalConflictAt(i)) {
           return true;
@@ -202,8 +194,10 @@
       var sum = [];
       var j = 0;
       for ( var i = minorDiagonalColumnIndexAtFirstRow; i >= 0; i--) {
-        diag.push(this._currentAttributes[j][i]);
-        j++;     
+        if (j < this._currentAttributes.n) {
+          diag.push(this._currentAttributes[j][i]);
+          j++;     
+        }
       }
       sum = diag.reduce(function(acc, val) {
         return acc + val;
@@ -227,17 +221,6 @@
         return acc + val;
       });
       return sum > 1;
-
-      // for ( var i = 0; i < this._currentAttributes.n; i++) {
-      //   if (j < this._currentAttributes.n) {
-      //     diag.push(this._currentAttributes[j][i]);
-      //     j++;     
-      //   }
-      // }
-      // sum = diag.reduce(function(acc, val) {
-      //   return acc + val;
-      // });
-      // return sum > 1;
     },
 
     // test if any minor diagonals on this board contain conflicts
