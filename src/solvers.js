@@ -22,11 +22,10 @@ window.findNRooksSolution = function(n) {
   var newBoard = new Board({n: n});
   var populateBoard = function(rounds) {
     if (rounds === n) {
-      // debugger;
-      console.log(newBoard.rows());
       solution = newBoard.rows().map(function(x) {
         return x.slice();
       });
+      // solution = JSON.stringify(newBoard.rows());
       return;
     }
     for (var i = 0; i < n; i++) {
@@ -41,6 +40,7 @@ window.findNRooksSolution = function(n) {
 
   populateBoard(0);
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
+  // return JSON.parse(solution);
   return solution;
 };
 
